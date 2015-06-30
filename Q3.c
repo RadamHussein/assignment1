@@ -11,18 +11,21 @@
 void sort(int* number, int n){
     /*Sort the given array number , of length n*/
     int temp;
-    int x;
+    int a;
+    int b;
 
-    for (x = 0; x < n; x++)
+    for (a = 0; a < n; a++)
     {
-	if (number[x] > number[x+1])
+	for (b = a; b < n; b++)
 	{
-	    temp = number[x+1];
-	    number[x+1] = number[x];
-	    number[x] = temp;
+	    if (number[a] > number[b])
+	    {
+	        temp = number[a];
+	        number[a] = number[b];
+	        number[b] = temp;
+	    }
 	}
     }
- 
 }
 
 int main(){
@@ -30,14 +33,15 @@ int main(){
     int n = 20;
 
     /*Allocate memory for an array of n integers using malloc.*/
-    int myArray[n];
+    int *ptrArray;
+    ptrArray = malloc(sizeof(int));
 
     /*Fill this array with random numbers, using rand().*/
     srand(time(NULL));
 
     for (int x = 0; x < n; x++)
     {
-	myArray[x] = rand() % 100 + 1;
+	ptrArray[x] = rand() % 100 + 1;
     };
     
     /*Print the contents of the array.*/
@@ -45,21 +49,23 @@ int main(){
     
     for (int y = 0; y < n; y++)
     {
-	printf(" %d", myArray[y]);
+	printf(" %d", ptrArray[y]);
     };
     
     printf("\n");
 
     /*Pass this array along with n to the sort() function of part a.*/
-    sort(&myArray[n], n);
+    sort(ptrArray, n);
 
     /*Print the contents of the array.*/    
     printf("\n");
 
     for (int z = 0; z < n; z++)
     {
-	printf(" %d", myArray[z]);
+	printf(" %d", ptrArray[z]);
     };
+
+    printf("\n");
 
     return 0;
 }
